@@ -44,5 +44,6 @@ def get_grid(start, end):
         points.reverse()
     return points
 
-result = get_grid((1,1),(22,9))
-print(result)
+if __name__ == '__main__':
+    result = get_grid((1,1),(22,9))
+    print(result)
