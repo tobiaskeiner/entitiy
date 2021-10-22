@@ -1,4 +1,5 @@
 #! /usr/bin/env python3
+from typing import List, Tuple
 
 # multiplier for coordinates
 X_MULT: float = 1
@@ -24,10 +25,10 @@ sf: shapefile.Reader = shapefile.Reader(FILE)
 X_MAX: int = round(X_LIMIT * X_MULT)
 Y_MAX: int = round(Y_LIMIT * Y_MULT)
 
-grid: list[list[bool]] = [[False for _ in range(Y_MAX)] for _ in range(X_MAX)]
+grid: List[List[bool]] = [[False for _ in range(Y_MAX)] for _ in range(X_MAX)]
 
 for shape in sf.iterShapes():
-    coords: list[float] = shape.bbox
+    coords: List[float] = shape.bbox
     assert len(coords) == 4, 'more or less than 4 ccordinate parts'
     start_x: int = round((coords[0] + X_OFFSET) * X_MULT)
     start_y: int = round((coords[1] + Y_OFFSET) * Y_MULT)
@@ -39,7 +40,7 @@ for shape in sf.iterShapes():
         and 0 <= end_x < X_MAX
         and 0 <= end_y < Y_MAX
     ):
-        points: list[tuple[int, int]] = get_grid((start_x, start_y), (end_x, end_y))
+        points: List[Tuple[int, int]] = get_grid((start_x, start_y), (end_x, end_y))
         for x, y in points:
             grid[x][y] = True
 
