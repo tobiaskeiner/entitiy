@@ -12,9 +12,6 @@
     "height": 100,
     "infinite": false,
     "layers": [
-        
-        
-           
     ],
     "nextlayerid": 47,
     "nextobjectid": 1,
@@ -26,7 +23,7 @@
         {
             "columns": 8,
             "firstgid": 1,
-            "image": "tilesets/floortileset.png",
+            "image": "../../tilesets/floortileset.png",
             "imageheight": 256,
             "imagewidth": 256,
             "margin": 0,
@@ -51,7 +48,7 @@
         {
             "columns": 32,
             "firstgid": 65,
-            "image": "tilesets/wikipaka.png",
+            "image": "../../tilesets/wikipaka.png",
             "imageheight": 2048,
             "imagewidth": 1024,
             "margin": 0,
@@ -9137,7 +9134,7 @@
         {
             "columns": 9,
             "firstgid": 2113,
-            "image": "tilesets/mapUtilities.png",
+            "image": "../../tilesets/mapUtilities.png",
             "imageheight": 32,
             "imagewidth": 288,
             "margin": 0,
@@ -9162,7 +9159,7 @@
         {
             "columns": 16,
             "firstgid": 2122,
-            "image": "tilesets/eastereggs.png",
+            "image": "../../tilesets/eastereggs.png",
             "imageheight": 512,
             "imagewidth": 512,
             "margin": 0,
@@ -9977,7 +9974,7 @@
         {
             "columns": 16,
             "firstgid": 2378,
-            "image": "tilesets/rc3-mullana-overlay.png",
+            "image": "../../tilesets/rc3-mullana-overlay.png",
             "imageheight": 1024,
             "imagewidth": 512,
             "margin": 0,
@@ -10212,7 +10209,7 @@
         {
             "columns": 16,
             "firstgid": 2890,
-            "image": "tilesets/food_and_drinks.png",
+            "image": "../../tilesets/food_and_drinks.png",
             "imageheight": 2048,
             "imagewidth": 512,
             "margin": 0,
@@ -10225,7 +10222,7 @@
         {
             "columns": 16,
             "firstgid": 3914,
-            "image": "tilesets/rc3-mullana-floor-wall.png",
+            "image": "../../tilesets/rc3-mullana-floor-wall.png",
             "imageheight": 512,
             "imagewidth": 512,
             "margin": 0,
@@ -10238,7 +10235,7 @@
         {
             "columns": 16,
             "firstgid": 4170,
-            "image": "tilesets/n2n_32x32_B1.png",
+            "image": "../../tilesets/n2n_32x32_B1.png",
             "imageheight": 512,
             "imagewidth": 512,
             "margin": 0,
@@ -11112,7 +11109,7 @@
         {
             "columns": 16,
             "firstgid": 4426,
-            "image": "tilesets/Outside_A2.png",
+            "image": "../../tilesets/Outside_A2.png",
             "imageheight": 480,
             "imagewidth": 512,
             "margin": 0,
@@ -11427,7 +11424,7 @@
         {
             "columns": 16,
             "firstgid": 4666,
-            "image": "tilesets/RoyalTileset-TileD.png",
+            "image": "../../tilesets/RoyalTileset-TileD.png",
             "imageheight": 512,
             "imagewidth": 512,
             "margin": 0,
@@ -11752,7 +11749,7 @@
         {
             "columns": 16,
             "firstgid": 4922,
-            "image": "tilesets/TileE.png",
+            "image": "../../tilesets/TileE.png",
             "imageheight": 512,
             "imagewidth": 512,
             "margin": 0,
@@ -11807,7 +11804,7 @@
         {
             "columns": 31,
             "firstgid": 5178,
-            "image": "tilesets/telnet_tileset_11.png",
+            "image": "../../tilesets/telnet_tileset_11.png",
             "imageheight": 992,
             "imagewidth": 992,
             "margin": 0,
@@ -13117,7 +13114,7 @@
         {
             "columns": 16,
             "firstgid": 6139,
-            "image": "tilesets/deviant_milkian_1.png",
+            "image": "../../tilesets/deviant_milkian_1.png",
             "imageheight": 512,
             "imagewidth": 512,
             "margin": 0,
@@ -13932,7 +13929,7 @@
         {
             "columns": 2,
             "firstgid": 6395,
-            "image": "tilesets/mikrowelle.png",
+            "image": "../../tilesets/mikrowelle.png",
             "imageheight": 32,
             "imagewidth": 64,
             "margin": 0,
@@ -13984,7 +13981,7 @@
         {
             "columns": 4,
             "firstgid": 6397,
-            "image": "tilesets/billard.png",
+            "image": "../../tilesets/billard.png",
             "imageheight": 128,
             "imagewidth": 128,
             "margin": 0,
@@ -14079,7 +14076,7 @@
         {
             "columns": 5,
             "firstgid": 6413,
-            "image": "tilesets/fairylight-anim.png",
+            "image": "../../tilesets/fairylight-anim.png",
             "imageheight": 1504,
             "imagewidth": 160,
             "margin": 0,
@@ -15059,7 +15056,7 @@
         {
             "columns": 47,
             "firstgid": 6648,
-            "image": "tilesets/fairylight-anim2.png",
+            "image": "../../tilesets/fairylight-anim2.png",
             "imageheight": 160,
             "imagewidth": 1504,
             "margin": 0,
@@ -16039,7 +16036,7 @@
         {
             "columns": 5,
             "firstgid": 6883,
-            "image": "tilesets/flowers.png",
+            "image": "../../tilesets/flowers.png",
             "imageheight": 160,
             "imagewidth": 160,
             "margin": 0,
@@ -16219,7 +16216,7 @@
         {
             "columns": 1,
             "firstgid": 6908,
-            "image": "tilesets/popcorn.png",
+            "image": "../../tilesets/popcorn.png",
             "imageheight": 64,
             "imagewidth": 32,
             "margin": 0,
@@ -16232,7 +16229,7 @@
         {
             "columns": 40,
             "firstgid": 6910,
-            "image": "tilesets/units.png",
+            "image": "../../tilesets/units.png",
             "imageheight": 192,
             "imagewidth": 1280,
             "margin": 0,
@@ -16245,7 +16242,7 @@
         {
             "columns": 8,
             "firstgid": 7150,
-            "image": "tilesets/lego.png",
+            "image": "../../tilesets/lego.png",
             "imageheight": 224,
             "imagewidth": 256,
             "margin": 0,
@@ -16258,7 +16255,7 @@
         {
             "columns": 3,
             "firstgid": 7206,
-            "image": "tilesets/villager4.png",
+            "image": "../../tilesets/villager4.png",
             "imageheight": 128,
             "imagewidth": 96,
             "margin": 0,
@@ -16333,7 +16330,7 @@
         {
             "columns": 7,
             "firstgid": 7218,
-            "image": "tilesets/minideko.png",
+            "image": "../../tilesets/minideko.png",
             "imageheight": 416,
             "imagewidth": 224,
             "margin": 0,
@@ -16346,7 +16343,7 @@
         {
             "columns": 5,
             "firstgid": 7309,
-            "image": "tilesets/zug.png",
+            "image": "../../tilesets/zug.png",
             "imageheight": 32,
             "imagewidth": 160,
             "margin": 0,
@@ -16359,7 +16356,7 @@
         {
             "columns": 5,
             "firstgid": 7314,
-            "image": "tilesets/foodies_sheet_borderless.png",
+            "image": "../../tilesets/foodies_sheet_borderless.png",
             "imageheight": 64,
             "imagewidth": 160,
             "margin": 0,
