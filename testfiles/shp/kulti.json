@@ -1,0 +1,12 @@
+{
+    "xMult": 1.5,
+    "yMult": 1.5,
+    "xOffset": -155,
+    "yOffset": 30,
+    "xLimit": 20,
+    "yLimit": 71,
+    "isWall": true,
+    "wallHeight": 2,
+    "file": "testfiles/shp/kulti",
+    "printMatrix": true
+}

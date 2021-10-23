@@ -1,0 +1,12 @@
+{
+    "xMult": 1.25,
+    "yMult": 1.25,
+    "xOffset": 45,
+    "yOffset": 76,
+    "xLimit": 92,
+    "yLimit": 30,
+    "isWall": true,
+    "wallHeight": 2,
+    "file": "testfiles/shp/lounge",
+    "printMatrix": true
+}
