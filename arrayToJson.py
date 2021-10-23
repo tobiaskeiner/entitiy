@@ -5,7 +5,7 @@ def convert_json(tileSet):
     tileSet.reverse()
     flatTileSet = [item for sublist in tileSet for item in sublist]
 
-    print(flatTileSet)
+    #print(flatTileSet)
     tileId = {
         0: [0],#0 = nichts
         1: [65, 66, 67, 68, 69, 70, 71, 72, 73], #1 wird mit verschiedenen wall texturen überschrieben
