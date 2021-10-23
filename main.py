@@ -1,6 +1,8 @@
+import os
 from arrayToJson import convert_json
 from wall_scheme import get_walls
 from arrayToJson import convert_json
+from pathlib import Path
 import argparse
 
 #params:
@@ -15,7 +17,7 @@ import argparse
     # filename
 parser = argparse.ArgumentParser(description='Process shp files.')
 parser.add_argument('--config', metavar='C', type=str,
-                    help='an config gile to use', default='press2/config.json')
+                    help='an config file to use', default='press2/config.json')
 
 args = parser.parse_args()
 grid = get_walls(args.config)
