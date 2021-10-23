@@ -34,4 +34,4 @@ def convert_json(tileSet):
         
     existing["layers"].append(layers)
     with open('Map/testMap.json', 'w') as json_file:
-        json.dump(existing, json_file)
+        json.dump(existing, json_file, indent=4)
