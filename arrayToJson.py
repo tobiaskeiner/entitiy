@@ -2,7 +2,6 @@ def convert_json(tileSet):
     import json
     from random import choice
 
-    tileSet.reverse()
     flatTileSet = [item for sublist in tileSet for item in sublist]
 
     #print(flatTileSet)
