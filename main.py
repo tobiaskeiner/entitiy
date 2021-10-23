@@ -1,6 +1,7 @@
 from arrayToJson import convert_json
 from wall_scheme import get_walls
 from arrayToJson import convert_json
+import argparse
 
 #params:
     #multiplier for coordinates X
@@ -12,5 +13,10 @@ from arrayToJson import convert_json
     # is a wall || 2.5d
     # wall height
     # filename
-grid = get_walls('press2/config.json')
+parser = argparse.ArgumentParser(description='Process shp files.')
+parser.add_argument('--config', metavar='C', type=str,
+                    help='an config gile to use', default='press2/config.json')
+
+args = parser.parse_args()
+grid = get_walls(args.config)
 convert_json(grid)
