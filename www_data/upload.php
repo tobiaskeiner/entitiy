@@ -16,7 +16,6 @@ function Main(){
         return;
     } else {
         echo "Datei ". $_FILES['shapefile']['name'] ." erfolgreich upgeloadet.\n";
-        //readfile($_FILES['shapefile']['tmp_name']);
 
         CreateInputDir();
         CreateConfigFile();
@@ -28,8 +27,8 @@ function Main(){
 function RunConverter(){
     chdir(__DIR__);
     global $PATH_TO_CONVERTER;
-    $configPath = realpath("input\\config.json");
-    $cmd = "python ..\\main.py --config '$configPath'";
+    $configPath = realpath("input/config.json");
+    $cmd = "python ../main.py --config '$configPath'";
 
     exec($cmd . ' 2>&1', $output, $return_var);
     echo "<br>cli command<code>$cmd</code>";
@@ -42,7 +41,7 @@ function RunConverter(){
     // echo "Output:\n";
     // print_r($output);
 
-    if(file_exists(realpath("input\\configMap.json"))){
+    if(file_exists(realpath("input/configMap.json"))){
         echo '<h3>output.json erfolgreich erstellt</h3>';
         echo '<a class="button" href="input/configMap.json">download</a>';
     } else {
