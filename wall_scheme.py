@@ -1,26 +1,31 @@
-#! /usr/bin/env python3
-def get_walls(X_MULT, Y_MULT, X_OFFSET, Y_OFFSET, X_LIMIT, Y_LIMIT, IS_WALL, WALL_HEIGHT, File_Name, print_matrix = False):
-    from typing import List, Tuple
-    """
+from json import load
+from typing import List, Tuple
+
+def get_walls(config_file):
+    with open(config_file) as f:
+        config = load(f)
+
     # multiplier for coordinates
-    X_MULT: float = 0.6
-    Y_MULT: float = 0.3
+    X_MULT: float = config['xMult']
+    Y_MULT: float = config['yMult']
 
     # every point will get shifted by these values
-    X_OFFSET: int = 90
-    Y_OFFSET: int = 80
+    X_OFFSET: int = config['xOffset']
+    Y_OFFSET: int = config['yOffset']
 
     # positive limit for coordinates
     # negative values will be discarded
-    X_LIMIT: int = 180
-    Y_LIMIT: int = 150
+    X_LIMIT: int = config['xLimit']
+    Y_LIMIT: int = config['yLimit']
 
     # parameters for walls
-    IS_WALL = False
-    WALL_HEIGHT = 2
-    """
+    IS_WALL: bool = config['isWall']
+    WALL_HEIGHT: int =config['wallHeight']
+
     # input file
-    FILE: str = File_Name
+    FILE: str = config['file']
+
+    print_matrix: bool = config['printMatrix']
 
     import shapefile
     from grid import get_grid

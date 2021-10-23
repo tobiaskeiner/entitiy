@@ -1,0 +1,12 @@
+{
+    "xMult": 0.6,
+    "yMult": 0.3,
+    "xOffset": 90,
+    "yOffset": 80,
+    "xLimit": 180,
+    "yLimit": 150,
+    "isWall": false,
+    "wallHeight": 2,
+    "file": "testfiles/linien-punkte-point",
+    "printMatrix": false
+}
