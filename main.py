@@ -12,5 +12,5 @@ from arrayToJson import convert_json
     # is a wall || 2.5d
     # wall height
     # filename
-grid = get_walls(0.6, 0.3, 90, 80, 180, 150, False, 2, "pres2")
+grid = get_walls(0.6, 0.3, 90, 80, 180, 150, False, 2, "testfiles/linien-punkte-point", False)
 convert_json(grid)
