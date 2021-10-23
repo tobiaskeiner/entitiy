@@ -12,24 +12,9 @@ def convert_json(tileSet):
         2:[206,207,208], #2 wall top
         3:[135,136,137]# parket boden
     }
-
-
-
-
-
-
     #with open('ConvertedArray.txt', 'w') as f:
     #   f.write(f'{my_array}')
     #a_file.close()
-
-
-
-
-
-
-
-
-    
     editedFlatTielSet = [choice(tileId[Item]) for Item in flatTileSet]
     
     layers = {
@@ -46,6 +31,7 @@ def convert_json(tileSet):
     }
     with open("Map/testMap.json") as f:
         existing = json.load(f)
+        
     existing["layers"].append(layers)
     with open('Map/testMap.json', 'w') as json_file:
         json.dump(existing, json_file)
