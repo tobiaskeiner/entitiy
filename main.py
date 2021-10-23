@@ -19,4 +19,4 @@ parser.add_argument('--config', metavar='C', type=str,
 
 args = parser.parse_args()
 grid = get_walls(args.config)
-#convert_json(grid)
+convert_json(grid, args.config)

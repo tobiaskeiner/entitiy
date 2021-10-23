@@ -1,10 +1,15 @@
-def convert_json(tileSet):
+from pathlib import Path
+def convert_json(tileSet,name):
     import json
     from random import choice
 
     flatTileSet = [item for sublist in tileSet for item in sublist]
 
-    #print(flatTileSet)
+    with open(name) as f:
+        config = json.load(f)
+
+    # multiplier for coordinates
+
     tileId = {
         0: [0],#0 = nichts
         1: [65, 66, 67, 68, 69, 70, 71, 72, 73], #1 wird mit verschiedenen wall texturen überschrieben
@@ -28,9 +33,12 @@ def convert_json(tileSet):
         "x":0,
         "y":0
     }
-    with open("Map/testMap.json") as f:
+    pathName = Path(name)
+    basePath = pathName.parent / Path(pathName.stem + 'Map.json')
+    with open("Map/BaseMap.json") as f:
         existing = json.load(f)
         
     existing["layers"].append(layers)
-    with open('Map/testMap.json', 'w') as json_file:
-        json.dump(existing, json_file, indent=4)
+
+    with open(basePath, 'w') as json_file:
+        json.dump(existing, json_file)
