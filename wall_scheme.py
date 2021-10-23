@@ -25,7 +25,7 @@ sf: shapefile.Reader = shapefile.Reader(FILE)
 X_MAX: int = round(X_LIMIT * X_MULT)
 Y_MAX: int = round(Y_LIMIT * Y_MULT)
 
-grid: List[List[bool]] = [[False for _ in range(Y_MAX)] for _ in range(X_MAX)]
+grid: List[List[bool]] = [[False for _ in range(X_MAX)] for _ in range(Y_MAX)]
 
 for shape in sf.iterShapes():
     coords: List[float] = shape.bbox
@@ -42,9 +42,10 @@ for shape in sf.iterShapes():
     ):
         points: List[Tuple[int, int]] = get_grid((start_x, start_y), (end_x, end_y))
         for x, y in points:
-            grid[x][y] = True
+            grid[y][x] = True
 
-print(grid)
+#print(grid)
+grid.reverse()
 
 for array in grid:
     for element in array:
