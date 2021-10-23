@@ -1,0 +1,12 @@
+{
+    "xMult": 0.3,
+    "yMult": 0.3,
+    "xOffset": 165,
+    "yOffset": 85,
+    "xLimit": 310,
+    "yLimit": 250,
+    "isWall": false,
+    "wallHeight": 2,
+    "file": "testfiles/shp/overview",
+    "printMatrix": true
+}
