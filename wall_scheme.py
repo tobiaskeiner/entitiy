@@ -2,24 +2,24 @@
 from typing import List, Tuple
 
 # multiplier for coordinates
-X_MULT: float = 1.25
-Y_MULT: float = 1.25
+X_MULT: float = 0.6
+Y_MULT: float = 0.3
 
 # every point will get shifted by these values
-X_OFFSET: int = 45
-Y_OFFSET: int = 74
+X_OFFSET: int = 90
+Y_OFFSET: int = 80
 
 # positive limit for coordinates
 # negative values will be discarded
-X_LIMIT: int = 90
-Y_LIMIT: int = 26
+X_LIMIT: int = 180
+Y_LIMIT: int = 150
 
 # parameters for walls
-IS_WALL = True
+IS_WALL = False
 WALL_HEIGHT = 2
 
 # input file
-FILE: str = 'merged'
+FILE: str = 'pres2'
 
 import shapefile
 from grid import get_grid
