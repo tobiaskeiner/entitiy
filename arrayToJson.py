@@ -35,7 +35,8 @@ def convert_json(tileSet,name):
     }
     pathName = Path(name)
     basePath = pathName.parent / Path(pathName.stem + 'Map.json')
-    with open("Map/BaseMap.json") as f:
+    baseMapPath = Path(__file__).parent / Path('Map/BaseMap.json')
+    with open(baseMapPath) as f:
         existing = json.load(f)
         
     existing["layers"].append(layers)
