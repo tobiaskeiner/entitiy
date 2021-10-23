@@ -44,3 +44,11 @@ for shape in sf.iterShapes():
             grid[x][y] = True
 
 print(grid)
+
+for array in grid:
+    for element in array:
+        if element == True:
+            print("#",end='')
+        else:
+            print(".",end='')
+    print()
