@@ -70,7 +70,7 @@ def get_walls(config_file):
         for i in range(1, WALL_HEIGHT + 1):
             for y, line in enumerate(basis):
                 for x, tile in enumerate(line):
-                    if tile != 0 and grid[y + i][x] == 0:
+                    if tile != 0:
                         grid[y + i][x] = 2 if WALL_HEIGHT == i else tile
 
     grid.reverse()
