@@ -7,9 +7,10 @@ def convert_json(tileSet):
 
     print(flatTileSet)
     tileId = {
-        0: [0],
-        1: [65, 66, 67, 68, 69, 70, 71, 72, 73],
-        2:[206,207,208]
+        0: [0],#0 = nichts
+        1: [65, 66, 67, 68, 69, 70, 71, 72, 73], #1 wird mit verschiedenen wall texturen überschrieben
+        2:[206,207,208], #2 wall top
+        3:[135,136,137]# parket boden
     }
     #with open('ConvertedArray.txt', 'w') as f:
     #   f.write(f'{my_array}')
