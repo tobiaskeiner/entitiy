@@ -11471,6 +11471,19 @@
         {
          "firstgid":7376,
          "source":"standing_table.tsx"
+        }, 
+        {
+         "columns":1,
+         "firstgid":7388,
+         "image":"..\/..\/tilesets\/wall_kulti.png",
+         "imageheight":32,
+         "imagewidth":32,
+         "margin":0,
+         "name":"wall_kulti",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":32,
+         "tilewidth":32
         }],
  "tilewidth":32,
  "type":"map",
