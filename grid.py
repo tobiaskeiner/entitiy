@@ -43,7 +43,3 @@ def get_grid(start, end):
     if swapped:
         points.reverse()
     return points
-
-if __name__ == '__main__':
-    result = get_grid((1,1),(22,9))
-    print(result)
