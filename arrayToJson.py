@@ -15,10 +15,7 @@ def convert_json(tileSet):
     #   f.write(f'{my_array}')
     #a_file.close()
     editedFlatTielSet = [choice(tileId[Item]) for Item in flatTileSet]
-
-
-
-
+    
     layers = {
         "data": editedFlatTielSet,
         "height":len(tileSet),
@@ -31,6 +28,8 @@ def convert_json(tileSet):
         "x":0,
         "y":0
     }
-
-    with open('layer.json', 'w') as json_file:
-        json.dump(layers, json_file)
+    with open("Map/testMap.json") as f:
+        existing = json.load(f)
+    existing["layers"].append(layers)
+    with open('Map/testMap.json', 'w') as json_file:
+        json.dump(existing, json_file)
