@@ -1,6 +1,6 @@
 <?php
 
-$PATH_TO_CONVERTER = "D:\\OpenDataCamp2021\\entitiy\\";
+$PATH_TO_CONVERTER = "..";
 
 function Main(){
 
@@ -8,6 +8,8 @@ function Main(){
         return;
     }
 
+
+    echo "<div class=\"section\">";
     echo "<h3>Upload results</h3>";
 
     if (!is_uploaded_file($_FILES['shapefile']['tmp_name'])) {
@@ -20,17 +22,33 @@ function Main(){
         CreateConfigFile();
         RunConverter();
     }
+    echo "</div>";
 }
 
 function RunConverter(){
+    chdir(__DIR__);
     global $PATH_TO_CONVERTER;
     $configPath = realpath("input\\config.json");
-    $cmd = "python main.py --config '$configPath'";
-    echo "--->  $cmd  <---";
-    exec($cmd, $output, $return_var);
-    echo "Return code: $return_var\n";
+    $cmd = "python ..\\main.py --config '$configPath'";
+
+    exec($cmd . ' 2>&1', $output, $return_var);
+    echo "<br>cli command<code>$cmd</code>";
     echo "Output:\n";
     print_r($output);
+
+    //debug python cmd
+    // echo "<br>cli command<code>$cmd</code>";
+    // echo "Return code: $return_var\n";
+    // echo "Output:\n";
+    // print_r($output);
+
+    if(file_exists(realpath("input\\configMap.json"))){
+        echo '<h3>output.json erfolgreich erstellt</h3>';
+        echo '<a class="button" href="input/configMap.json">download</a>';
+    } else {
+        echo '<h3>Sorry</h3>';
+        echo 'output.json konnte nicht erstellt werden <br><br>';
+    }
 }
 
 function CreateInputDir()

@@ -1,6 +1,8 @@
+import os
 from arrayToJson import convert_json
 from wall_scheme import get_walls
 from arrayToJson import convert_json
+from pathlib import Path
 import argparse
 
 #params:
