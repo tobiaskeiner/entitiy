@@ -342,7 +342,7 @@
                          "value":"interiorMap.json#A"
                         }, 
                         {
-                         "name":"startLayer",
+                         "name":"start",
                          "type":"string",
                          "value":"A"
                         }],
