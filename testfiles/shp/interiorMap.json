@@ -440,7 +440,7 @@
                         {
                          "name":"exitUrl",
                          "type":"string",
-                         "value":""
+                         "value":"kultiMap.json#stadion"
                         }],
                  "type":"tilelayer",
                  "visible":true,
