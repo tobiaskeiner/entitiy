@@ -33,6 +33,10 @@ technologischer Einblick (Architekturstack, Algorithmik)
 Wildcard Challenge
 =====================
 
+## FanAdventure
+
+\vspace{5mm}
+
 Wir schaffen eine __virtuelle Vereinsheimat__, damit sich Fans jederzeit im Station oder rundherum treffen und austauschen können:  jeden Tag und zu jeder Zeit, vor dem Spiel, nach dem Spiel, nicht nur an Spieltagen und auch unter Pandemiebedingungen ...
 
 
@@ -41,7 +45,7 @@ Demo
 
 ![](kulti2.png)
 
-<https://play.workadventu.re/_/global/dungeon.heep.sax.de/entitiy/testfiles/shp/overviewMap.json>
+<http://www.sax.de/map>
 
 
 Pipeline und Tools
@@ -58,15 +62,15 @@ Pipeline und Tools
 Service
 ==========
 
-
 ![](service.png)
 
-<https://dungeon.heep.sax.de/entitiy/www_data/>
+<http://www.sax.de/convert>
+
 
 Links
 =========
 
-* Play: <https://play.workadventu.re/_/global/dungeon.heep.sax.de/entitiy/testfiles/shp/overviewMap.json>
+* Play: <http://www.sax.de/map>
 * Source: <https://github.com/tobiaskeiner/entitiy>
-* Service: <https://dungeon.heep.sax.de/entitiy/www_data/>
+* Service: <http://www.sax.de/convert>
 
