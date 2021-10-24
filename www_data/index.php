@@ -9,6 +9,10 @@
   <!-- Milligram CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
   <title>Fan Adventure</title>
+
+  <style>
+    form { background-color: #fafafa; padding: 1em; }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -36,6 +40,14 @@
           <div class="column">
             <label for="shapefile">Dein Shapefile (*.shp)</label>
             <input type="file" name="shapefile">
+          </div>
+          <div class="column">
+            <label for="shapefile">Deine Datei Attributdatei bzw Sachdatendatei (*.dbf)</label>
+            <input type="file" name="attributes">
+          </div>
+          <div class="column">
+            <label for="shapefile">Deine Datei mit der Index der Geometrie (*.shx)</label>
+            <input type="file" name="indexes">
           </div>
         </div>
         <div class="row">
