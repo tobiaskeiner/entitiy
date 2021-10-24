@@ -47,10 +47,11 @@ function RunConverter(){
         echo "</pre>";
     }
 
+
     $mapPath = realpath($PATH_TMP_WORKING_DIR.DIRECTORY_SEPARATOR.'configMap.json');
     if(file_exists($mapPath)){
-        echo '<h3>output.json erfolgreich erstellt</h3>';
-        echo '<a class="button" href="'.$PATH_TMP_WORKING_DIR.DIRECTORY_SEPARATOR.'configMap.json">download</a>';
+        echo '<h3>configMap.json erfolgreich erstellt</h3>';
+        echo '<a class="button" href="configMap.json">download</a>';
     } else {
         echo '<h3>Sorry</h3>';
         echo 'output.json konnte nicht erstellt werden <br><br>';
