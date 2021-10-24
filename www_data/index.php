@@ -19,7 +19,6 @@
     .bgimage  {
         background-image: url("stadion.png");
         position: absolute;
-        z-index: -1;
         background-position: top;
         -webkit-background-size: auto;
         -moz-background-size: auto;
