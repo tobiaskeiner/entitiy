@@ -1,6 +1,6 @@
 {
-    "xMult": 1.5,
-    "yMult": 1.5,
+    "xMult": 1,
+    "yMult": 1,
     "xOffset": -155,
     "yOffset": 30,
     "xLimit": 20,

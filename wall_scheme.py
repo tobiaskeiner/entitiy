@@ -38,31 +38,17 @@ def get_walls(config_file):
     grid: List[List[bool]] = [[0 for _ in range(X_MAX)] for _ in range(Y_MAX + WALL_HEIGHT if IS_WALL else Y_MAX)]
 
     for shape in sf.iterShapes():
-        if hasattr(shape, 'bbox'):
-            coords: List[float] = shape.bbox
-            assert len(coords) == 4, 'more or less than 4 ccordinate parts'
-            start_x: int = round((coords[0] + X_OFFSET) * X_MULT)
-            start_y: int = round((coords[1] + Y_OFFSET) * Y_MULT)
-            end_x: int = round((coords[2] + X_OFFSET) * X_MULT)
-            end_y: int = round((coords[3] + Y_OFFSET) * Y_MULT)
-            if (
-                    0 <= start_x < X_MAX
-                and 0 <= start_y < Y_MAX
-                and 0 <= end_x < X_MAX
-                and 0 <= end_y < Y_MAX
-            ):
-                points: List[Tuple[int, int]] = get_grid((start_x, start_y), (end_x, end_y))
-                for x, y in points:
-                    grid[y][x] = 1
-        elif hasattr(shape, 'points'):
-            for point in shape.points:
-                x: int = round((point[0] + X_OFFSET) * X_MULT)
-                y: int = round((point[1] + Y_OFFSET) * Y_MULT)
-                if 0 <= x <= X_MAX and 0 <= y <= Y_MAX:
-                    grid[y][x] = 1
-        else:
-            print(dir(shape))
-            raise NotImplementedError
+        last_point = None
+        for point in shape.points:
+            x: int = round((point[0] + X_OFFSET) * X_MULT)
+            y: int = round((point[1] + Y_OFFSET) * Y_MULT)
+            if 0 <= x <= X_MAX and 0 <= y <= Y_MAX:
+                grid[y][x] = 1
+                if last_point:
+                    points: List[Tuple[int, int]] = get_grid((x, y), (last_point[0], last_point[1]))
+                    for x, y in points:
+                        grid[y][x] = 1
+                last_point = (x, y)
 
 
     if IS_WALL:
