@@ -28,7 +28,7 @@
         width: 100%;
         height: 100%;
       }
-    form { background-color: #fafafa89; padding: 1em; }
+    form { background-color: #fafafaDD; padding: 1em; }
   </style>
 </head>
 <body>
