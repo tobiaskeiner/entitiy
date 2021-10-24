@@ -1,13 +1,14 @@
 <?php
 
+//contains the dir path to the converter script (pyton)
 $PATH_TO_CONVERTER = "..";
+//contains the file path to the config file
+$PATH_TO_CONFIG = null;
 
 function Main(){
-
     if (!isset($_FILES["shapefile"])) {
         return;
     }
-
 
     echo "<div class=\"section\">";
     echo "<h3>Upload results</h3>";
@@ -17,7 +18,8 @@ function Main(){
     } else {
         echo "Datei ". $_FILES['shapefile']['name'] ." erfolgreich upgeloadet.\n";
 
-        CreateInputDir();
+        $PATH_TO_SHAPEFILE = $_FILES['shapefile']['tmp_name'];
+        //CreateInputDir();
         CreateConfigFile();
         RunConverter();
     }
@@ -25,23 +27,17 @@ function Main(){
 }
 
 function RunConverter(){
-    chdir(__DIR__);
-    global $PATH_TO_CONVERTER;
-    $configPath = realpath("input/config.json");
-    $cmd = "python ../main.py --config '$configPath'";
+    global $PATH_TO_CONFIG;
+    $cmd = 'python ../main.py --config "'.$PATH_TO_CONFIG.'"';
 
     exec($cmd . ' 2>&1', $output, $return_var);
     echo "<br>cli command<code>$cmd</code>";
-    echo "Output:\n";
+    echo "Output:\n<pre>";
     print_r($output);
+    echo "</pre>";
 
-    //debug python cmd
-    // echo "<br>cli command<code>$cmd</code>";
-    // echo "Return code: $return_var\n";
-    // echo "Output:\n";
-    // print_r($output);
-
-    if(file_exists(realpath("input/configMap.json"))){
+    $mapPath = realpath(dirname($_FILES['shapefile']['tmp_name']).DIRECTORY_SEPARATOR.'configMap.json');
+    if(file_exists($mapPath)){
         echo '<h3>output.json erfolgreich erstellt</h3>';
         echo '<a class="button" href="input/configMap.json">download</a>';
     } else {
@@ -50,19 +46,19 @@ function RunConverter(){
     }
 }
 
-function CreateInputDir()
-{
-    if (!is_dir('input'))
-        mkdir('input');
+// function CreateInputDir()
+// {
+//     if (!is_dir('input'))
+//         mkdir('input');
 
-    $old_files = glob('input/*');
-    // Deleting all the files in the list
-    foreach($old_files as $file)
-        if(is_file($file)) unlink($file);
+//     $old_files = glob('input/*');
+//     // Deleting all the files in the list
+//     foreach($old_files as $file)
+//         if(is_file($file)) unlink($file);
 
-    if(!move_uploaded_file($_FILES['shapefile']['tmp_name'], 'input/uploaded_file.shp'))
-        return;
-}
+//     if(!move_uploaded_file($_FILES['shapefile']['tmp_name'], 'input/uploaded_file.shp'))
+//         return;
+// }
 
 function CreateConfigFile()
 {
@@ -76,10 +72,15 @@ function CreateConfigFile()
         "wallHeight" => intval($_POST['wallHeight']),
         "isWall"    => boolval($_POST['isWall']),
         "printMatrix" => boolval($_POST['printMatrix']),
-        "file" => realpath("input/uploaded_file.shp")
+        "file" =>  $_FILES['shapefile']['tmp_name'] //realpath("input/uploaded_file.shp")
     ];
 
-    $config = fopen("input/config.json", "w") or die("Unable to open file!");
+    // echo "Pfad: ".getcwd();
+    // echo "File: ".basename(getcwd()."/input/config.json");
+
+    global $PATH_TO_CONFIG;
+    $PATH_TO_CONFIG = dirname($_FILES['shapefile']['tmp_name']).'/config.json';
+    $config = fopen($PATH_TO_CONFIG, "w") or die("Unable to open file!");
     fwrite($config, json_encode($config_array));
     fclose($config);
 }
