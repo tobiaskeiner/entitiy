@@ -36,7 +36,7 @@
                 {
                  "name":"openWebsite",
                  "type":"string",
-                 "value":"http:\/\/weltfussball.de\/teams\/dynamo-dresden\/21\/"
+                 "value":"https:\/\/query.wikidata.org\/embed.html#%23defaultView%3ATimeline%0ASELECT%20%3Fitem%20%3FitemLabel%20%3Fdate%0AWHERE%20%0A%7B%0A%20%20%3Fitem%20wdt%3AP31%20wd%3AQ16466010.%20%0A%20%20%3Fitem%20wdt%3AP276%20wd%3AQ170154.%0A%20%20%3Fitem%20wdt%3AP585%20%3Fdate.%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%0A%20%20%7D"
                 }],
          "type":"tilelayer",
          "visible":true,
