@@ -1,6 +1,8 @@
 # FanAdventure
 This repo offers an automated solution to convert .shp files into an WorkAdventure Map
 
+The maps are hosted at [rpi.heep.sax.de](https://play.workadventu.re/_/global/rpi.heep.sax.de/maps/overviewMap.json)
+
 ## install
 
 ```python -m pip install -r requirements.txt```
