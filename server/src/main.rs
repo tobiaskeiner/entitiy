@@ -227,7 +227,6 @@ async fn index_post(hb: Data<Handlebars<'_>>, session: Session, data: Multipart)
 async fn get_json(session: Session, web::Path(name): web::Path<String>) -> HttpResponse {
     let stored_name = session.get::<String>(NAME).ok().flatten();
     let directory = session.get::<String>(DIRECTORY).ok().flatten();
-    println!("{:?}, {:?}", stored_name, directory);
     if let (Some(stored_name), Some(directory)) = (stored_name, directory) {
         if stored_name == name {
             let filename = Path::new(&directory).join(MAP_OUTPUT);
