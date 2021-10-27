@@ -59,6 +59,7 @@ fn default_is_wall() -> bool {false}
 
 impl Parameters {
     fn from_session(session: &Session) -> Parameters {
+        let directory = Parameters::get_directory(session);
         Parameters {
             x_mult: session.get(X_MULT).ok().flatten().unwrap_or_else(default_mult),
             y_mult: session.get(Y_MULT).ok().flatten().unwrap_or_else(default_mult),
@@ -68,15 +69,22 @@ impl Parameters {
             y_limit: session.get(Y_LIMIT).ok().flatten().unwrap_or_else(default_limit),
             wall_height: session.get(WALL_HEIGHT).ok().flatten().unwrap_or_else(default_wall_height),
             is_wall: session.get(IS_WALL).ok().flatten().unwrap_or_else(default_is_wall),
-            directory: session.get(DIRECTORY).ok().flatten(),
+            directory,
             name: session.get(NAME).ok().flatten(),
             message: None,
             success: false,
         }
     }
 
+    fn get_directory(session: &Session) -> Option<String> {
+        session.get::<String>(DIRECTORY)
+            .ok()
+            .flatten()
+            .filter(|directory| Path::new(&directory).is_dir())
+    }
+
     fn enrich_path(&mut self, session: &Session) {
-        self.directory = session.get(DIRECTORY).ok().flatten();
+        self.directory = Parameters::get_directory(session);
         if let None = self.directory {
             let rng = thread_rng();
             let chars: String = rng.sample_iter(Alphanumeric)

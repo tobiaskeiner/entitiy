@@ -42,10 +42,11 @@
         </p>
 
         {{#if message}}
-          <p>{{message}}</p>
-        {{/if}}
-        {{#if success}}
-          <a href="/{{name}}.json" download="{{name}}.json">Download here</a>
+          <p>{{message}}.
+          {{#if success}}
+            <a href="/{{name}}.json" download="{{name}}.json">Download here</a>
+          {{/if}}
+          </p>
         {{/if}}
       </div>
 
