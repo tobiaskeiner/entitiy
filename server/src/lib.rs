@@ -9,9 +9,14 @@ use rand::{Rng, distributions::Alphanumeric, thread_rng};
 use serde_derive::{Serialize, Deserialize};
 use futures::{StreamExt, TryStreamExt};
 use serde_json::json;
+use std::sync::{Arc, Mutex};
+use std::collections::HashMap;
+use std::time::{SystemTime, UNIX_EPOCH};
+use tokio::time::Duration;
 
 const BASE_DIRECTORY: &'static str = "./tmp";
 const EXEC: &'static str = "../main.py";
+const CLEANUP_TIMEOUT: u64 = 10 * 60; // 10 minutes
 
 mod error;
 
@@ -27,6 +32,11 @@ const DIRECTORY: &'static str = "directory";
 const NAME: &'static str = "name";
 const CONFIG_FILE: &'static str = "conf.json";
 const MAP_OUTPUT: &'static str = "confMap.json";
+
+struct ApplicationData<'a> {
+    hb: Handlebars<'a>,
+    last_modified: Arc<Mutex<HashMap<String, u64>>>,
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -97,16 +107,20 @@ impl Parameters {
             let path = Path::new(BASE_DIRECTORY).join(chars);
             create_dir(&path).unwrap();
             let name = path.to_string_lossy().to_string();
-            session.set(DIRECTORY, &name).unwrap();
+            session.insert(DIRECTORY, &name).unwrap();
             self.directory = Some(name);
         }
     }
 }
 
+fn current_time() -> u64 {
+    SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs()
+}
+
 #[get("/")]
-async fn index(hb: Data<Handlebars<'_>>, session: Session) -> HttpResponse {
+async fn index(app_data: Data<ApplicationData<'_>>, session: Session) -> HttpResponse {
     let parameters = Parameters::from_session(&session);
-    let body = hb.render("index", &parameters).unwrap();
+    let body = app_data.hb.render("index", &parameters).unwrap();
 
     HttpResponse::Ok().body(body)
 }
@@ -186,19 +200,19 @@ async fn interpret_multipart(parameters: &mut Parameters, mut data: Multipart, s
         }
     }
     if let Some(name) = parameters.name.as_ref() {
-        session.set(NAME, name)?
+        session.insert(NAME, name)?
     }
     Ok(())
 }
 
 #[post("/")]
-async fn index_post(hb: Data<Handlebars<'_>>, session: Session, data: Multipart) -> HttpResponse {
+async fn index_post(app_data: Data<ApplicationData<'_>>, session: Session, data: Multipart) -> HttpResponse {
     let mut parameters = Parameters::from_session(&session);
     parameters.enrich_path(&session);
     let multipart_result = interpret_multipart(&mut parameters, data, &session).await;
     match (multipart_result, parameters.directory.as_ref()) {
         (Ok(()), Some(directory)) => {
-            let process_result = process_files(&parameters, directory);
+            let process_result = process_files(&parameters, directory, &app_data.last_modified).await;
             if let Err(error) = process_result {
                 parameters.message = Some(error.safe_display())
             } else {
@@ -213,11 +227,11 @@ async fn index_post(hb: Data<Handlebars<'_>>, session: Session, data: Multipart)
             unreachable!("interpret_multipart should fail if directory is none")
         }
     }
-    let body = hb.render("index", &parameters).unwrap();
+    let body = app_data.hb.render("index", &parameters).unwrap();
     HttpResponse::Ok().body(body)
 }
 
-fn process_files(parameters: &Parameters, directory: &String) -> Result<(), Error> {
+async fn process_files(parameters: &Parameters, directory: &String, last_modified: &Arc<Mutex<HashMap<String, u64>>>) -> Result<(), Error> {
     let config = json!({
         "xMult":       parameters.x_mult,
         "yMult":       parameters.y_mult,
@@ -241,12 +255,17 @@ fn process_files(parameters: &Parameters, directory: &String) -> Result<(), Erro
     if output.stderr.len() > 0 {
         Err(Error::ExecutionError(std::str::from_utf8(&output.stderr).unwrap().to_string()))
     } else {
+        {
+            let mut last_modified = last_modified.lock().unwrap();
+            last_modified.insert(directory.clone(), current_time());
+        }
         Ok(())
     }
 }
 
 #[get("/{name}.json")]
-async fn get_json(session: Session, web::Path(name): web::Path<String>) -> HttpResponse {
+async fn get_json(session: Session, path: web::Path<String>) -> HttpResponse {
+    let name = path.into_inner();
     let stored_name = session.get::<String>(NAME).ok().flatten();
     let directory = session.get::<String>(DIRECTORY).ok().flatten();
     if let (Some(stored_name), Some(directory)) = (stored_name, directory) {
@@ -264,15 +283,53 @@ async fn get_json(session: Session, web::Path(name): web::Path<String>) -> HttpR
     }
 }
 
+async fn cleanup(last_modified: Arc<Mutex<HashMap<String, u64>>>) {
+    let mut next: Option<(String, u64)> = None;
+    loop {
+        if let Some((path, timestamp)) = next.take() {
+            let current = current_time();
+            let target = timestamp + CLEANUP_TIMEOUT;
+            if current >= target {
+                let mut last_modified = last_modified.lock().unwrap();
+                if last_modified[&path] == timestamp {
+                    last_modified.remove(&path);
+                    remove_dir_all(&path).unwrap();
+                }
+            } else {
+                tokio::time::sleep(Duration::from_secs(target - current)).await
+            }
+        }
+        {
+            let last_modified = last_modified.lock().unwrap();
+            let max = last_modified.values().max();
+            if let Some(max) = max {
+                next = last_modified
+                    .iter()
+                    .filter(|(_, timestamp)| timestamp == &max)
+                    .map(|(path, timestamp)| (path.clone(), *timestamp))
+                    .next()
+            }
+        }
+        if let None = next {
+            tokio::time::sleep(Duration::from_secs(CLEANUP_TIMEOUT)).await;
+        }
+    }
+}
+
 #[actix_web::main]
 pub async fn main() -> io::Result<()> {
-    let mut handlebars = Handlebars::new();
-    handlebars.set_strict_mode(true);
-    handlebars.set_dev_mode(cfg!(debug_assertions));
-    handlebars
+    let mut hb = Handlebars::new();
+    hb.set_strict_mode(true);
+    hb.set_dev_mode(cfg!(debug_assertions));
+    hb
         .register_templates_directory(".hbs", "static/templates")
         .unwrap();
-    let handlebars_ref = Data::new(handlebars);
+    let app_data = Data::new(ApplicationData{
+        hb,
+        last_modified: Arc::new(Mutex::new(HashMap::new())),
+    });
+
+    tokio::task::spawn(cleanup(app_data.last_modified.clone()));
 
     // ignore if directory does not exist
     let _ = remove_dir_all(BASE_DIRECTORY);
@@ -281,7 +338,7 @@ pub async fn main() -> io::Result<()> {
     HttpServer::new(move || {
         App::new()
             .wrap(CookieSession::signed(&[0;32]).secure(false))
-            .app_data(handlebars_ref.clone())
+            .app_data(app_data.clone())
             .service(index)
             .service(index_post)
             .service(get_json)
