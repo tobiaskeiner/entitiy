@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 import os
 from arrayToJson import convert_json
 from wall_scheme import get_walls
