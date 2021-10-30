@@ -249,8 +249,8 @@ async fn process_files(parameters: &Parameters, directory: &String, last_modifie
         let mut file = File::create(&conf_file)?;
         file.write_all(config.to_string()[..].as_bytes())?;
     } // using block so the file is being closed here
-    let output = Command::new("python")
-        .args(["/usr/bin/env", "python3", EXEC, "--config", conf_file.to_str().ok_or(Error::FilenameError)?])
+    let output = Command::new("python3")
+        .args([EXEC, "--config", conf_file.to_str().ok_or(Error::FilenameError)?])
         .output()?;
     if output.stderr.len() > 0 {
         Err(Error::ExecutionError(std::str::from_utf8(&output.stderr).unwrap().to_string()))
