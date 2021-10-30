@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from pathlib import Path
 def convert_json(tileSet,name):
     import json
