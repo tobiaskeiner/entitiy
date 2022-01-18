@@ -38,7 +38,7 @@
                 {
                     "name": "openWebsite",
                     "type": "string",
-                    "value": "https://query.wikidata.org/embed.html#%23defaultView%3ATimeline%0ASELECT%20%3Fitem%20%3FitemLabel%20%3Fdate%0AWHERE%20%0A%7B%0A%20%20%3Fitem%20wdt%3AP31%20wd%3AQ16466010.%20%0A%20%20%3Fitem%20wdt%3AP276%20wd%3AQ170154.%0A%20%20%3Fitem%20wdt%3AP585%20%3Fdate.%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%0A%20%20%7D"
+                    "value": "https://query.wikidata.org/embed.html#%23defaultView%3ATimeline%0ASELECT%20DISTINCT%20%3Fitem%20%3FitemLabel%20%3Fdate%20WHERE%20%7B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%22.%20%7D%0A%20%20%20%20%20%20%3Fitem%20p%3AP31%20%3Fstatement0.%0A%20%20%20%20%20%20%3Fstatement0%20%28ps%3AP31%2F%28wdt%3AP279%2A%29%29%20wd%3AQ16466010.%0A%20%20%20%20%20%20%3Fitem%20p%3AP276%20%3Fstatement1.%0A%20%20%20%20%20%20%3Fstatement1%20%28ps%3AP276%2F%28wdt%3AP279%2A%29%29%20wd%3AQ170154.%0A%20%20%20%20%20%20%3Fitem%20wdt%3AP585%20%3Fdate.%0A%7D%0AORDER%20BY%20%3Fdate"
                 }
             ],
             "type": "tilelayer",
